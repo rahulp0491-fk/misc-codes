@@ -9,6 +9,8 @@ LFLAGS = $(DEBUG)
 COMMON_OBJS = $(COMMON_DIR)/common.o
 STRING_MATCHER_OBJS = $(ALGOS_DIR)/string_matcher.o
 
+OBJS = $(COMMON_OBJS) $(STRING_MATCHER_OBJS)
+
 COMMON_DEPS = $(COMMON_DIR)/common.cpp $(COMMON_DIR)/common.h
 STRING_MATCHER_DEPS = $(ALGOS_DIR)/string_matcher.cpp $(ALGOS_DIR)/string_matcher.h $(COMMON_DIR)/common.h
 
@@ -27,4 +29,4 @@ $(STRING_MATCHER_OBJS) : $(STRING_MATCHER_DEPS)
 	$(CC) $(CFLAGS) $(STRING_MATCHER_MAIN) -o $(STRING_MATCHER_OBJS)
 
 clean:
-	rm $(COMMON_DIR)/*.o $(ALGOS_DIR)/*.o $(EXEC_NAME) 
+	rm $(OBJS) $(EXEC_NAME) 
