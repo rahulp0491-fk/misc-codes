@@ -4,6 +4,7 @@
 #include <cstring>
 #include <cmath>
 #include <cstdlib>
+#include "string_matcher.h"
 #include "../common/common.h"
 
 using namespace std;
