@@ -1,21 +1,24 @@
-PROG_NAME = run.out
+EXEC_NAME = run.out
 COMMON_DIR = common
 ALGOS_DIR = algos
-OBJS = $(COMMON_DIR)/common.o $(ALGOS_DIR)/string_matcher.o
 CC = g++
 DEBUG = -g
 CFLAGS = -c $(DEBUG)
 LFLAGS = $(DEBUG)
 
-all : $(OBJS)
-	$(CC) $(LFLAGS) $(OBJS) -o $(PROG_NAME)
+COMMON_OBJS = $(COMMON_DIR)/common.o
+STRING_MATCHER_OBJS = $(ALGOS_DIR)/string_matcher.o
+STRING_MATCHER = string_matcher
+
+$(STRING_MATCHER) : $(COMMON_OBJS) $(STRING_MATCHER_OBJS)
+	$(CC) $(LFLAGS) $(COMMON_OBJS) $(STRING_MATCHER_OBJS) -o $(EXEC_NAME)
 
 $(COMMON_DIR)/common.o : $(COMMON_DIR)/common.cpp $(COMMON_DIR)/common.h
-	$(CC) $(CFLAGS) $(COMMON_DIR)/common.cpp -o $(COMMON_DIR)/common.o
+	$(CC) $(CFLAGS) $(COMMON_DIR)/common.cpp -o $(COMMON_OBJS)
 
 $(ALGOS_DIR)/string_matcher.o : $(ALGOS_DIR)/string_matcher.cpp $(ALGOS_DIR)/string_matcher.h $(COMMON_DIR)/common.h
-	$(CC) $(CFLAGS) $(ALGOS_DIR)/string_matcher.cpp -o $(ALGOS_DIR)/string_matcher.o
+	$(CC) $(CFLAGS) $(ALGOS_DIR)/string_matcher.cpp -o $(STRING_MATCHER_OBJS)
 
 
 clean:
-	rm $(COMMON_DIR)/*.o $(ALGOS_DIR)/*.o $(PROG_NAME) 
+	rm $(COMMON_DIR)/*.o $(ALGOS_DIR)/*.o $(EXEC_NAME) 
