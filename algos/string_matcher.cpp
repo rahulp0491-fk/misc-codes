@@ -7,7 +7,7 @@
 #include "string_matcher.h"
 #include "../common/common.h"
 
-#define DEBUG
+#define DEBUG 0
 
 using namespace std;
 
@@ -73,7 +73,7 @@ void rabin_karp_matcher(string T, string P, uint64_t d, uint64_t q) {
   /* Matching */
   for (int s  = 0; s < n-m+1; s++) {
 
-#ifdef DEBUG
+#if DEBUG
     printf ("[%s] p=%llu, t=%llu\n", __FUNCTION__, p, t);  
 #endif
 
@@ -87,7 +87,7 @@ void rabin_karp_matcher(string T, string P, uint64_t d, uint64_t q) {
       if (i == m) printf ("[%s] Pattern exists with shift %d\n", __FUNCTION__,  s + 1);
     }
     /* Calculating next t */
-    if (s < n-m) t = ((d*(t-T[s]*h)) % q + T[s+m]) % q;
+    if (s < n-m) t = ((d*((t - T[s]*h + q) % q)) % q + T[s+m]) % q;
   }
 }
 
