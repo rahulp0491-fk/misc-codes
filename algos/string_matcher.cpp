@@ -7,6 +7,8 @@
 #include "string_matcher.h"
 #include "../common/common.h"
 
+#define DEBUG
+
 using namespace std;
 
 /*
@@ -72,7 +74,7 @@ void rabin_karp_matcher(string T, string P, uint64_t d, uint64_t q) {
   for (int s  = 0; s < n-m+1; s++) {
 
 #ifdef DEBUG
-    printf ("[%s] p=%llu, p=%llu\n", __FUNCTION__, p, t);  
+    printf ("[%s] p=%llu, t=%llu\n", __FUNCTION__, p, t);  
 #endif
 
     if (p == t) {
