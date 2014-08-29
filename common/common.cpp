@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <cmath>
+#include <cstdib>
 #include "../common/common.h"
 
 using namespace std;

@@ -3,6 +3,7 @@
 #include <string>
 #include <cstring>
 #include <cmath>
+#include <cstdlib>
 #include "../common/common.h"
 
 using namespace std;
@@ -17,7 +18,7 @@ void naive_string_matcher(string t, string p) {
     for (j = 0; j < p.length(); j++) {
       if (p[j] != t[i+j]) break;
     }
-    if (j == p.length()) cout << "Naive: Pattern found with shift " << i + 1 << endl;
+    if (j == p.length()) printf ("[%s] Pattern exists with shift %d\n", __FUNCTION__, i + 1);
   }
 }
 
@@ -70,7 +71,7 @@ void rabin_karp_matcher(string T, string P, uint64_t d, uint64_t q) {
   for (int s  = 0; s < n-m+1; s++) {
 
 #ifdef DEBUG
-    cout << p << " " << t << endl;
+    printf ("[%s] p=%llu, p=%llu\n", __FUNCTION__, p, t);  
 #endif
 
     if (p == t) {
@@ -80,7 +81,7 @@ void rabin_karp_matcher(string T, string P, uint64_t d, uint64_t q) {
 	if (P[i] != T[s+i]) break;
       }
       //cout << i << " " << m;
-      if (i == m) cout << "Rabin-Karp: Pattern exists with shift " << s + 1 << endl;
+      if (i == m) printf ("[%s] Pattern exists with shift %d\n", __FUNCTION__,  s + 1);
     }
     /* Calculating next t */
     if (s < n-m) t = ((d*(t-T[s]*h)) % q + T[s+m]) % q;
@@ -96,12 +97,15 @@ int main() {
   /* naive_string_matcher */
   naive_string_matcher(t, p);
   
-  /* naive string matcher with gaps */
+  /* 
+   * Cormen: 32.1-4
+   * naive string matcher with gaps
+   */
   if (naive_string_matcher_for_pattern_with_gaps(t, p)) {
-    cout << "Naive_gaps: Pattern exists !" << endl;
+    printf ("Naive_gaps: Pattern exists !\n");
   }
   else {
-    cout << "Naive_gaps: Pattern does not exists !" << endl;
+    printf ("Naive_gaps: Pattern does not exists !\n");
   }
 #endif
   
