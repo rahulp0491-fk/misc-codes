@@ -53,6 +53,7 @@ bool naive_string_matcher_for_pattern_with_gaps(string t, string p) {
 /*
  * Rabin Karp Algorithm for string matching
  * Find all shifts in the text which matches the supplied pattern
+ * Hash value is pretty naive for now. Same as given in Cormen
  */
 
 const uint64_t rbm_d = 256;         // Ascii for now !
@@ -86,7 +87,7 @@ void rabin_karp_matcher(string T, string P, uint64_t d, uint64_t q) {
       //cout << i << " " << m;
       if (i == m) printf ("[%s] Pattern exists with shift %d\n", __FUNCTION__,  s + 1);
     }
-    /* Calculating next t */
+    /* Calculating hash value for next m characters in t */
     if (s < n-m) t = ((d*((t - T[s]*h + q) % q)) % q + T[s+m]) % q;
   }
 }
