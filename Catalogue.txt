@@ -1,0 +1,7 @@
+This is a list of all codes that exists in this repository.
+
+Algorithms
+	String Matching
+	       Naive matching
+	       Rabin Karp matching
+	
