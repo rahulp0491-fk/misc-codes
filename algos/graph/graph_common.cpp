@@ -9,9 +9,11 @@ vector <int> adj[1000];
 int vis[NODES];
 int pi[NODES];
 int color[NODES];
+int depth[NODES];
 
 void graph_init() {
   memset(vis, 0, sizeof(vis));
   memset(pi, -1, sizeof(pi));
   memset(color, 0, sizeof(color));
+  memset(depth, -1, sizeof(depth));
 }
