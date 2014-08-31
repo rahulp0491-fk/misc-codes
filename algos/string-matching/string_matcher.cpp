@@ -4,6 +4,7 @@
 #include <cstring>
 #include <cmath>
 #include <cstdlib>
+#include <vector>
 #include "string_matcher.h"
 #include "../number-theory/nt_common.h"
 
@@ -58,8 +59,8 @@ bool naive_string_matcher_for_pattern_with_gaps(string t, string p) {
  *        - Improve hashing
  */
 
-const uint64_t rbm_d = 256;         // Ascii for now !
-const uint64_t rbm_q = 1000000007;
+const uint64_t rkm_d = 256;         // Ascii for now !
+const uint64_t rkm_q = 1000000007;
 
 void rabin_karp_matcher(string T, string P, uint64_t d, uint64_t q) {
   int n = T.length();
@@ -94,11 +95,64 @@ void rabin_karp_matcher(string T, string P, uint64_t d, uint64_t q) {
   }
 }
 
+/*
+ * Cormern: 32.2-2 - Part 1
+ * Rabin Karp to search for k patterns of same length
+ */
+void rkm_for_k_patterns_of_same_len(string T, vector <string> P, uint32_t k, uint64_t d, uint64_t q) {
+  int n = T.length();
+  int m = P[0].length();
+  uint64_t h = modular_pow(d, m-1, q);
+  uint64_t p[k], t = 0;
+
+  memset(p, 0, sizeof(p));
+
+  /* Pre-processing - patterns */
+  for (int i = 0; i < k; i++) {
+    for (int j = 0; j < m; j++) {
+      p[i] = ((d*p[i] % q) + P[i][j]) % q;
+    }
+  }
+
+  /* Pre-processing - text */
+  for (int i = 0; i < m; i++) {
+     t = ((d*t % q) + T[i]) % q;
+  }
+
+  /* Matching */
+  for (int s = 0; s < n-m+1; s++) {
+    for (int i = 0; i < k; i++) {
+
+#if DEBUG
+      printf ("[%s] pattern=%s, p=%llu, t=%llu\n", __FUNCTION__, P[i].c_str(), p[i], t);
+#endif 
+
+      if (p[i] == t) {
+	int j;
+	for (j = 0; j < m; j++) {
+	  if (P[i][j] != T[s+j]) break;
+	}
+	if (j == m) printf ("[%s] Pattern %s exists with shift %d\n", __FUNCTION__, P[i].c_str(), s+1);
+      }
+    }
+    /* Calculating hash */
+    if (s < n-m) t = ((d * ((t - ((T[s] * h) % q) + q) % q)) % q + T[s+m]) % q;
+  }
+}
+
 int main() {
-  string t, p;
-  getline(cin, t);
-  getline(cin, p);
   
+  /* Input */
+  uint64_t k;
+  string t, temp;
+  getline(cin, t);
+  scanf ("%llu\n", &k);
+  vector <string> p;
+  for (int i = 0; i < k; i++) {
+    getline(cin, temp);
+    p.push_back(temp);
+  }
+
 #if 0
   /* naive_string_matcher */
   naive_string_matcher(t, p);
@@ -113,10 +167,12 @@ int main() {
   else {
     printf ("Naive_gaps: Pattern does not exists !\n");
   }
-#endif
   
   /* Rabin-Karp */
-  rabin_karp_matcher(t, p, rbm_d, rbm_q);
+  rabin_karp_matcher(t, p, rkm_d, rkm_q);
+#endif
+
+  rkm_for_k_patterns_of_same_len(t, p, k, rkm_d, rkm_q);
 
   return 0;
 }
