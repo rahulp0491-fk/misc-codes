@@ -14,7 +14,7 @@ SM_OBJS = $(SM_DIR)/string_matcher.o
 OBJS = $(NT_OBJS) $(SM_OBJS)
 
 NT_DEPS = $(NT_DIR)/nt_common.cpp $(NT_DIR)/nt_common.h
-SM_DEPS = $(SM_DIR)/string_matcher.cpp $(SM_DIR)/string_matcher.h $(NT_DIR)/nt_common.h
+SM_DEPS = $(SM_DIR)/string_matcher.cpp $(SM_DIR)/sm_common.h $(NT_DIR)/nt_common.h
 
 NT_MAIN = $(NT_DIR)/nt_common.cpp
 SM_MAIN = $(SM_DIR)/string_matcher.cpp
