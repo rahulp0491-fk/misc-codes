@@ -6,9 +6,9 @@
 using namespace std;
 
 vector <int> adj[1000];
-int vis[NODES];        // visited array
-int pi[NODES];         // parent array
-int color[NODES];      // color to nodes for partition - bipartite
+int vis[NODES];
+int pi[NODES];
+int color[NODES];
 
 void graph_init() {
   memset(vis, 0, sizeof(vis));
