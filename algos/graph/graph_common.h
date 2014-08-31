@@ -5,12 +5,15 @@
 
 using namespace std;
 
+#define DEBUG 0
 #define NODES 1000
 #define DFS 0
 #define BFS 1
 
 vector <int> adj[1000];
-int vis[NODES], pi[NODES];
+int vis[NODES];        // visited array
+int pi[NODES];         // parent array
+int color[NODES];      // color to nodes for partition - bipartite
 
 void traverse(int, int);
 void bfs(int);
