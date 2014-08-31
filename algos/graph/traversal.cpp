@@ -23,13 +23,24 @@ void bfs(int root) {
       if (vis[v]) continue;
       q.push(v);
       vis[v] = 1;
+      pi[v] = u;
     }
+#if DEBUG
     printf ("[%s] visited %d\n", __FUNCTION__, u);
+#endif
+  }
+}
+
+void print_path(int u, int v) {
+  if (u == v) printf("[%s] node %d\n", __FUNCTION__,  u);
+  else if (pi[v] == -1) printf ("[%s] No path from %d to %d\n", __FUNCTION__, u, v);
+  else {
+    print_path(u, pi[v]);
+    printf("[%s] node %d\n", __FUNCTION__, v);
   }
 }
 
 void traverse(int n, int macro) {
-  memset(vis, 0, sizeof(vis));
   for (int i = 0; i < n; i++) {
     if (macro == BFS) {
       if (!vis[i]) bfs(i);
@@ -45,8 +56,9 @@ int main() {
     adj[u].push_back(v);
     adj[v].push_back(u);
   }
-  
+
   /* Breadth First Search */
   traverse(n, BFS);
+  print_path(0, n-1);
   return 0;
 }
