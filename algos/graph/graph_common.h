@@ -10,8 +10,10 @@ using namespace std;
 #define BFS 1
 
 vector <int> adj[1000];
-int vis[NODES];
+int vis[NODES], pi[NODES];
 
-void bfs(int root);
+void traverse(int, int);
+void bfs(int);
+void print_path(int, int);
 
 #endif
