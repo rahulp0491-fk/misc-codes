@@ -5,7 +5,7 @@
 #include <cmath>
 #include <cstdlib>
 #include "string_matcher.h"
-#include "../common/common.h"
+#include "../number-theory/nt_common.h"
 
 #define DEBUG 0
 

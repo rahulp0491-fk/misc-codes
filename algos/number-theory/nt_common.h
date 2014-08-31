@@ -1,5 +1,5 @@
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef NT_COMMON_H
+#define NT_COMMON_H
 
 /* All typedefs come here */
 typedef unsigned long long uint64_t;

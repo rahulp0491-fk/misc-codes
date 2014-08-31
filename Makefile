@@ -1,33 +1,34 @@
 EXEC_NAME = run.out
-COMMON_DIR = common
 ALGOS_DIR = algos
+NT_DIR = $(ALGOS_DIR)/number-theory
+SM_DIR = $(ALGOS_DIR)/string-matching
 CC = g++
 DEBUG = -g
 OBJECT = -o
 CFLAGS = -c $(DEBUG)
 LFLAGS = $(DEBUG)
 
-COMMON_OBJS = $(COMMON_DIR)/common.o
-STRING_MATCHER_OBJS = $(ALGOS_DIR)/string_matcher.o
+NT_OBJS = $(NT_DIR)/nt_common.o
+SM_OBJS = $(SM_DIR)/string_matcher.o
 
-OBJS = $(COMMON_OBJS) $(STRING_MATCHER_OBJS)
+OBJS = $(NT_OBJS) $(SM_OBJS)
 
-COMMON_DEPS = $(COMMON_DIR)/common.cpp $(COMMON_DIR)/common.h
-STRING_MATCHER_DEPS = $(ALGOS_DIR)/string_matcher.cpp $(ALGOS_DIR)/string_matcher.h $(COMMON_DIR)/common.h
+NT_DEPS = $(NT_DIR)/nt_common.cpp $(NT_DIR)/nt_common.h
+SM_DEPS = $(SM_DIR)/string_matcher.cpp $(SM_DIR)/string_matcher.h $(NT_DIR)/nt_common.h
 
-COMMON_MAIN = $(COMMON_DIR)/common.cpp
-STRING_MATCHER_MAIN = $(ALGOS_DIR)/string_matcher.cpp
+NT_MAIN = $(NT_DIR)/nt_common.cpp
+SM_MAIN = $(SM_DIR)/string_matcher.cpp
 
 STRING_MATCHER = string_matcher
 
-$(STRING_MATCHER) : $(COMMON_OBJS) $(STRING_MATCHER_OBJS)
-	$(CC) $(LFLAGS) $(COMMON_OBJS) $(STRING_MATCHER_OBJS) $(OBJECT) $(EXEC_NAME)
+$(STRING_MATCHER) : $(SM_OBJS) $(NT_OBJS)
+	$(CC) $(LFLAGS) $(SM_OBJS) $(NT_OBJS) $(OBJECT) $(EXEC_NAME)
 
-$(COMMON_OBJS) : $(COMMON_DEPS)
-	$(CC) $(CFLAGS) $(COMMON_MAIN) $(OBJECT) $(COMMON_OBJS)
+$(NT_OBJS) : $(NT_DEPS)
+	$(CC) $(CFLAGS) $(NT_MAIN) $(OBJECT) $(NT_OBJS)
 
-$(STRING_MATCHER_OBJS) : $(STRING_MATCHER_DEPS)
-	$(CC) $(CFLAGS) $(STRING_MATCHER_MAIN) $(OBJECT) $(STRING_MATCHER_OBJS)
+$(SM_OBJS) : $(SM_DEPS)
+	$(CC) $(CFLAGS) $(SM_MAIN) $(OBJECT) $(SM_OBJS)
 
 clean:
 	rm $(OBJS) $(EXEC_NAME) 

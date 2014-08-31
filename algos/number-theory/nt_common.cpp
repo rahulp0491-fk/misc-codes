@@ -2,7 +2,7 @@
 #include <cstring>
 #include <cmath>
 #include <cstdlib>
-#include "../common/common.h"
+#include "nt_common.h"
 
 using namespace std;
 
