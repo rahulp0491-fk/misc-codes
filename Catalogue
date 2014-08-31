@@ -2,11 +2,11 @@ This is a list of all codes that exists in this repository.
 
 Algorithms
 	String Matching
-	       Naive matching
-	       Rabin Karp matching
+		Naive matching
+	        Rabin Karp matching
 
 	Number Theory
-	       Modular exponentiation	
+		Modular exponentiation	
 
 	Graph
 		Breadth first search
