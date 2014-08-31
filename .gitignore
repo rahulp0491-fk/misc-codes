@@ -22,3 +22,7 @@
 
 # Swap files
 *~
+
+# emacs buffers
+#*#
+.#*
