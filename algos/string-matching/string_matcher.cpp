@@ -140,6 +140,8 @@ void rkm_for_k_patterns_of_same_len(string T, vector <string> P, uint32_t k, uin
   }
 }
 
+
+
 int main() {
   
   /* Input */
@@ -173,7 +175,7 @@ int main() {
 #endif
 
   /*
-   * Cormen: 32.2-2
+   * Cormen: 32.2-2 - Part 1
    * Rabin Karp for searching k patterns of same length
    */
   rkm_for_k_patterns_of_same_len(t, p, k, rkm_d, rkm_q);
