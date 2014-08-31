@@ -53,6 +53,12 @@ void check_bipartite(int n) {
   printf ("[%s] bipartite graph\n", __FUNCTION__);
 }
 
+void graph_init() {
+  memset(vis, 0, sizeof(vis));
+  memset(pi, -1, sizeof(pi));
+  memset(color, 0, sizeof(color));
+}
+
 int main() {
   int n, m, u, v;
   scanf("%d %d", &n, &m);
@@ -62,6 +68,8 @@ int main() {
     adj[v].push_back(u);
   }
   
+  graph_init();
+
   /* Bipartite check */
   check_bipartite(n);
   return 0;
