@@ -172,6 +172,10 @@ int main() {
   rabin_karp_matcher(t, p, rkm_d, rkm_q);
 #endif
 
+  /*
+   * Cormen: 32.2-2
+   * Rabin Karp for searching k patterns of same length
+   */
   rkm_for_k_patterns_of_same_len(t, p, k, rkm_d, rkm_q);
 
   return 0;
