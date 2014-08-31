@@ -59,9 +59,6 @@ bool naive_string_matcher_for_pattern_with_gaps(string t, string p) {
  *        - Improve hashing
  */
 
-const uint64_t rkm_d = 256;         // Ascii for now !
-const uint64_t rkm_q = 1000000007;
-
 void rabin_karp_matcher(string T, string P, uint64_t d, uint64_t q) {
   int n = T.length();
   int m = P.length();
